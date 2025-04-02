@@ -13,7 +13,7 @@ public class Seed
     {
          if (await context.Users.AnyAsync()) return;
 
-        var userData = await File.ReadAllTextAsync("Data/UserSeedData,json");
+        var userData = await File.ReadAllTextAsync("Data/UserSeedData.json");
 
         var options = new JsonSerializerOptions{PropertyNameCaseInsensitive=true};
 
