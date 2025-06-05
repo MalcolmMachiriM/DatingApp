@@ -14,9 +14,9 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './member-edit.component.css'
 })
 export class MemberEditComponent implements OnInit {
-  @ViewChild('editForm') editForm? : NgForm;
-  @HostListener('window:beforeunload', ['$event']) notify($event:any){
-    if(this.editForm?.dirty){
+  @ViewChild('editForm') editForm?: NgForm;
+  @HostListener('window:beforeunload', ['$event']) notify($event: any) {
+    if (this.editForm?.dirty) {
       $event.returnValue = true;
     }
   }
@@ -37,9 +37,12 @@ export class MemberEditComponent implements OnInit {
     })
   }
 
-  updateMember(){
-    console.log(this.member);
-    this.toastr.success('Profile Updated Successfully!');
-    this.editForm?.reset(this.member);
+  updateMember() {
+    this.memberService.updateMember(this.editForm?.value).subscribe({
+      next: _ => {
+        this.toastr.success('Profile Updated Successfully!');
+        this.editForm?.reset(this.member);
+      }
+    })
   }
 }
